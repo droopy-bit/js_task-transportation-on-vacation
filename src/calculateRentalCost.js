@@ -1,33 +1,35 @@
+const DAILY_RATE = 40;
+
+const WEEK_RENTAL_DAYS = 7;
+const WEEK_RENTAL_DISCOUNT = 50;
+
+const SIX_DAY_RENTAL_DAYS = 6;
+const SIX_DAY_RENTAL_DISCOUNT = 20;
+
+const THREE_DAY_RENTAL_DAYS = 3;
+const THREE_DAY_RENTAL_DISCOUNT = 20;
+
 /**
- * @param {number} days
+ * @param {number} numberOfDays
  *
  * @return {number}
  */
-const WEEK_RENTAL_DAYS = 7;
-const WEEK_RENTAL_PRICE = 230;
-
-const SIX_DAY_RENTAL_DAYS = 6;
-const SIX_DAY_RENTAL_PRICE = 220;
-
-const THREE_DAY_RENTAL_DAYS = 3;
-const THREE_DAY_RENTAL_PRICE = 100;
-
-const DEFAULT_RENTAL_PRICE = 80;
-
 function calculateRentalCost(numberOfDays) {
-  if (numberOfDays === WEEK_RENTAL_DAYS) {
-    return WEEK_RENTAL_PRICE;
+  const baseCost = numberOfDays * DAILY_RATE;
+
+  if (numberOfDays >= WEEK_RENTAL_DAYS) {
+    return baseCost - WEEK_RENTAL_DISCOUNT;
   }
 
-  if (numberOfDays === SIX_DAY_RENTAL_DAYS) {
-    return SIX_DAY_RENTAL_PRICE;
+  if (numberOfDays >= SIX_DAY_RENTAL_DAYS) {
+    return baseCost - SIX_DAY_RENTAL_DISCOUNT;
   }
 
-  if (numberOfDays === THREE_DAY_RENTAL_DAYS) {
-    return THREE_DAY_RENTAL_PRICE;
+  if (numberOfDays >= THREE_DAY_RENTAL_DAYS) {
+    return baseCost - THREE_DAY_RENTAL_DISCOUNT;
   }
 
-  return DEFAULT_RENTAL_PRICE;
+  return baseCost;
 }
 
 module.exports = calculateRentalCost;
